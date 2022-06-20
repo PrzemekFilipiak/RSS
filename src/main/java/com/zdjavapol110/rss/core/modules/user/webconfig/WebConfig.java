@@ -1,68 +1,44 @@
 package com.zdjavapol110.rss.core.modules.user.webconfig;
 
-import com.zdjavapol110.rss.core.modules.user.CustomUserDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
+
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import javax.sql.DataSource;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import static org.springframework.security.config.Customizer.withDefaults;
 
 @EnableWebSecurity
 @Configuration
 public class WebConfig {
 
-    @Autowired
-    private DataSource dataSource;
-
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return new CustomUserDetailsService();
-    }
-
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService());
-        authProvider.setPasswordEncoder(passwordEncoder());
-
-        return authProvider;
-    }
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.authenticationProvider(authenticationProvider());
-//    }
-
-
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http
-                    .authorizeRequests()
-                        .antMatchers("/signup/users").authenticated()
-                        .anyRequest().permitAll()
+
+        http
+                .authorizeRequests()
+                .antMatchers("/login","/", "/*.map","/bootstrap.min.css", "/blog.css", "/signup",
+                        "/favicon.ico", "/process_success", "/assets/**")
+                .permitAll()
+                .antMatchers("/users").hasAuthority("ADMIN")
+                .antMatchers( "/**")
+                .authenticated()
                 .and()
                     .formLogin()
+                    .loginPage("/login")
                     .usernameParameter("email")
-                    .defaultSuccessUrl("/signup/users")
+                    .passwordParameter("password")
+                    .defaultSuccessUrl("/events")
                     .permitAll()
                 .and()
-                    .logout().logoutSuccessUrl("/").permitAll()
+                    .logout()
+                    .logoutSuccessUrl("/login")
+                    .permitAll()
                 .and()
-//                    .authorizeHttpRequests((auth) -> auth
-//                        .anyRequest().authenticated()
-//                )
-                .httpBasic(Customizer.withDefaults())
-                .authenticationProvider(authenticationProvider()).build();
+                    .httpBasic(withDefaults());
+        return http.build();
     }
 
 //    @Override

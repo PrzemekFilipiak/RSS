@@ -1,0 +1,136 @@
+<!doctype html>
+<html class="no-js" lang="EN" xmlns:th="http://www.thymeleaf.org">
+
+<!-- head -->
+<div th:replace="/main-components/head :: fragment"></div>
+
+<body>
+<!-- header with nav menu -->
+<div th:replace="/main-components/header :: fragment"></div>
+
+<main>
+    <!--? Hero Start -->
+    <div class="slider-area2" style="margin-bottom: 20px">
+        <div class="slider-height2 d-flex align-items-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="hero-cap hero-cap2 text-center">
+                            <h2>Event details</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Hero End
+    <center>
+        <div id="mine-searchFrm">
+            <div th:replace="/main-components/header-components/header-event-list :: fragment"></div>
+        </div>
+    </center>
+-->
+    <!--================Blog Area =================-->
+    <section class="blog_area single-post-area section-padding">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-8 posts-list">
+                    <article th:replace="/events/components/event-single-entry-details :: fragment"></article>
+                    <div class="navigation-top">
+                        <div class="d-sm-flex justify-content-between text-center">
+                            <p class="like-info"><span class="align-middle"><i class="fa fa-heart"></i></span><span th:text="${event.numberOfParticipants}">1500</span> user(s)
+                                will participate</p>
+                        </div>
+                    </div>
+                    <div class="blog-author">
+                        <div class="media align-items-center">
+                            <!-- <img src="assets/img/blog/author.png" alt=""> -->
+                            <div class="media-body">
+                                <span style="margin-left: auto; margin-right: auto; text-align: center">
+                                    <h3>Event created by:</h3>
+                                <p th:text="${event?.createdBy?.displayName}">User from DataBase</p>
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- comments area -->
+                    <h4 style="padding-top: 20px">Comments</h4>
+                    <div id="comments" class="comments-area" style="padding-bottom: 0px; padding-top: 0px; margin-top: 10px">
+                        <div class="comment-list">
+                            <span th:switch="${isZeroComments}">
+                            <span th:case="no">
+                            <div th:each="comment: ${comments}" class="single-comment justify-content-between d-flex"
+                                 style="background-color: #f6f6f6; margin-bottom: 20px;">
+                                <div class="user justify-content-between d-flex" style="width:100%;">
+                                    <div class="desc" style="margin: 3%">
+                                        <p class="comment"
+                                           th:text="${comment.body}"></p>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-flex align-items-center">
+                                                <h5>
+                                                    <a href="#" th:text="${comment?.createdBy?.displayName}">Participant User</a>
+                                                </h5>
+                                                <p class="date" th:text="${comment.createdDate}">01-01-1900</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                    </div>
+                                </div>
+                            </div>
+                            </span>
+                                <span th:case="yes">
+                                    <div class="single-comment justify-content-between d-flex"
+                                         style="background-color: #f6f6f6; margin-bottom: 20px;">
+                                <div class="user justify-content-between d-flex" style="width:100%;">
+                                    <div class="desc" style="margin: 3%">
+                                        <p class="comment">There is no any comments yet.</p>
+
+                                    </div>
+                                    <div>
+                                    </div>
+                                </div>
+                            </div>
+                                </span>
+                            </span>
+
+
+                            <div class="comment-form">
+                                <h4>Leave a comment</h4>
+                                <form th:replace="/events/components/event-comment-form :: fragment"></form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="blog_right_sidebar">
+
+                        <aside class="single_sidebar_widget newsletter_widget"
+                               style="background-color: #f6f6f6;">
+                            <!--  th:if="${event.canDelete} -->
+                            <form th:action="@{/events/{id}/join(id=${event.id})}" th:method="post" >
+                                <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                                        type="submit">Participate
+                                </button>
+                            </form>
+
+<!--                            <form th:action="@{/events/{id}/leave(id=${event.id})}" th:method="post" >-->
+<!--                                <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"-->
+<!--                                        type="submit">Leave-->
+<!--                                </button>-->
+<!--                            </form>-->
+
+                        </aside>
+                    </div>
+                </div>
+            </div>
+    </section>
+    <!--================ Blog Area end =================-->
+</main>
+
+</body>
+<!-- footer -->
+<div th:replace="/main-components/footer :: fragment"></div>
+<div class="mine-js-hidden" th:replace="/main-components/js-list :: fragment"></div>
+</html>

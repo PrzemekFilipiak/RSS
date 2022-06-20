@@ -1,0 +1,47 @@
+<!doctype html>
+<html class="no-js" lang="EN" xmlns:th="http://www.thymeleaf.org">
+
+<!-- head -->
+<div th:replace="/main-components/head :: fragment"></div>
+
+<body>
+<!-- header with nav menu -->
+<div th:replace="/main-components/header :: fragment"></div>
+
+<main>
+    <!--? Hero Start -->
+    <div class="slider-area2" style="margin-bottom: 20px">
+        <div class="slider-height2 d-flex align-items-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="hero-cap hero-cap2 text-center">
+                            <h2>Add event</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Hero End -->
+    <section class="blog_area section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-8 mb-5 mb-lg-0">
+                    <div class="blog_left_sidebar">
+
+                        <form th:replace="/events/components/add-form :: fragment">...</form>
+
+                    </div>
+                </div>
+                <div class="col-2"></div>
+            </div>
+        </div>
+    </section>
+</main>
+
+</body>
+<!-- footer -->
+<div th:replace="/main-components/footer :: fragment"></div>
+<div class="mine-js-hidden" th:replace="/main-components/js-list :: fragment"></div>

@@ -1,6 +1,5 @@
 package com.zdjavapol110.rss.core.modules.user.service.dto;
 
-import com.zdjavapol110.rss.core.modules.user.UserRole;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -8,7 +7,7 @@ import lombok.experimental.Accessors;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "book")
+@XmlRootElement(name = "user")
 @Getter
 @Setter
 @ToString
@@ -29,5 +28,5 @@ public class UserDto {
 
     private String password;
 
-    private UserRole role;
+    private String role;
 }

@@ -1,31 +1,47 @@
 package com.zdjavapol110.rss.core.modules.user;
 
 import com.zdjavapol110.rss.core.modules.user.repository.UserEntity;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class CustomUserDetails implements UserDetails {
 
-    private UserEntity userEntity;
+    @Getter
+    private final Long id;
+    private String userName;
+    private String password;
+    private boolean active;
+    private List<GrantedAuthority> authorityList;
 
     public CustomUserDetails(UserEntity userEntity) {
-        this.userEntity = userEntity;
+        this.userName = userEntity.getEmail();
+        this.password = userEntity.getPassword();
+        this.active = userEntity.isActive();
+        this.authorityList = List.of(new SimpleGrantedAuthority(userEntity.getRole().name()));
+        this.id = userEntity.getId();
     }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorityList;
+
     }
 
     @Override
     public String getPassword() {
-        return userEntity.getPassword();
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return userEntity.getEmail();
+        return userName;
     }
 
     @Override
@@ -45,6 +61,7 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return active;
     }
+
 }

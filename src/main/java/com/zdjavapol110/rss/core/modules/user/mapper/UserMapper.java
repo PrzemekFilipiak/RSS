@@ -1,5 +1,7 @@
 package com.zdjavapol110.rss.core.modules.user.mapper;
 
+
+
 import com.zdjavapol110.rss.core.modules.user.repository.UserEntity;
 import com.zdjavapol110.rss.core.modules.user.service.dto.UserDto;
 
@@ -16,7 +18,7 @@ public class UserMapper {
                 .setLastName(user.getLastName())
                 .setPassword(user.getPassword())
                 .setEmail(user.getEmail())
-                .setRole(user.getRole());
+                .setRole(user.getRole().name());
 
     }
 

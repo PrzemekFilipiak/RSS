@@ -1,0 +1,119 @@
+<!doctype html>
+<html class="no-js" lang="EN" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<!-- head -->
+<div th:replace="/main-components/head :: fragment"></div>
+
+<body>
+<!-- preloader -->
+<div th:replace="/main-components/preloader :: fragment"></div>
+
+<!-- header with nav menu -->
+<div th:replace="/main-components/header :: fragment"></div>
+<main>
+    <!--? slider Area Start-->
+    <div class="slider-area position-relative">
+        <div class="slider-active">
+            <!-- Single Slider -->
+            <div class="single-slider slider-height d-flex align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-8 col-lg-8 col-md-9 col-sm-10">
+                            <div class="hero__caption">
+                                <span data-animation="fadeInLeft" data-delay=".1s">Event Manager</span>
+
+                                <h1 data-animation="fadeInLeft" data-delay=".5s">Manage your events and participate in
+                                    others like a BOSS</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- slider Area End-->
+    <!--? About Law Start-->
+    <section class="about-low-area section-padding2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-12">
+                    <div class="about-caption mb-50">
+                        <!-- Section Tittle -->
+                        <div class="section-tittle mb-35">
+
+                            <h2>Adding an event</h2>
+                        </div>
+                        <p>You can host your events and let others to participate in them.</p>
+                        <p>You can simply know how many people are going to pariticapte.</p>
+                        <p>Fill the event name, start and end date, details and that's it!</p>
+                    </div>
+                    <span sec:authorize="isAnonymous()">
+                        <a href="/signup" class="btn mt-50">Sign up</a>
+                    </span>
+                    <span sec:authorize="isAuthenticated()">
+                        <a href="/events" class="btn mt-50">Getting started</a>
+                    </span>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <!-- about-img -->
+                    <div class="about-img">
+                        <div class="about-font-img d-none d-lg-block">
+                            <img src="assets/img/gallery/about2.png" alt="About">
+                        </div>
+                        <div class="about-back-img ">
+                            <img src="assets/img/gallery/about1.png" alt="About">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- About Law End-->
+    <!--? Brand Area Start -->
+    <section class="team-area pt-180 pb-100 section-bg" data-background="assets/img/gallery/section_bg02.png">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-9">
+                    <!-- Section Tittle -->
+                    <div class="section-tittle section-tittle2 mb-50">
+                        <h2>Comment feature</h2>
+                        <p>You can comment an event if you wanna tell somebody something important.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- Brand Area End -->
+    <!--? About Law Start-->
+    <section class="about-low-area section-padding2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-12">
+                    <div class="about-caption mb-50">
+                        <!-- Section Tittle -->
+                        <div class="section-tittle mb-35">
+                            <h2>Search for an event</h2>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <p>Wanna go to the concert or something else? Search for it and just apply. </p>
+                    <p>Simple as that!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- About Law End-->
+    <div th:replace="/main-components/back-to-top :: fragment"></div>
+    <!-- footer -->
+    <div th:replace="/main-components/footer :: fragment"></div>
+    <!-- Scroll Up -->
+    <!-- JS scripts -->
+
+
+</main>
+</body>
+    <div class="mine-js-hidden" th:replace="/main-components/js-list :: fragment"></div>
+</html>

@@ -1,0 +1,74 @@
+<header th:fragment="fragment" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <!--? Header Start -->
+    <div class="header-area">
+        <div class="main-header header-sticky">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <!-- Logo -->
+                    <div class="col-xl-2 col-lg-2 col-md-1">
+                        <div class="logo">
+                            <a href="/"><img src="http://localhost:8080/assets/img/logo/logo.png" alt="App logo"></a>
+                        </div>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10">
+                        <div class="menu-main d-flex align-items-center justify-content-end">
+                            <!-- Main-menu -->
+                            <div class="main-menu f-right d-none d-lg-block">
+                                <nav>
+                                    <ul id="navigation">
+
+                                        <span sec:authorize="isAuthenticated()" class="mine-welcome-span">
+                                            Hi, <b><span sec:authentication="name"></span></b>!
+                                        </span>
+
+                                        <li><a href="/"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+
+                                        <li><a href="/contact"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
+                                        <span sec:authorize="isAuthenticated()">
+                                        <span th:if="'show' == ${searchByKeywordFormView}">
+                                                <li><a href="#" onclick="showSearchForm()">
+                                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                                    </a>
+                                                </li>
+                                        </span>
+                                            </span>
+                                        <span sec:authorize="isAnonymous()">
+                                        <li><a href="/login">Login</a></li>
+                                        </span>
+
+                                        <span sec:authorize="isAuthenticated()">
+                                            <li><a href="/events"><b><i class="fa fa-list" aria-hidden="true"></i> Event List</b></a></li>
+                                            <li><a th:href="@{/event-form}"><b><i class="fa fa-plus" aria-hidden="true"></i> Add event</b></a></li>
+                                        </span>
+                                        </span>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <span sec:authorize="isAnonymous()">
+                            <div class="header-right-btn f-right d-none d-lg-block ml-30">
+                                <a href="/signup" class="btn header-btn">Sign Up</a>
+                            </div>
+                            </span>
+
+                            <span sec:authorize="isAuthenticated()">
+                            <div class="header-right-btn f-right d-none d-lg-block ml-30">
+                                <form name="logoutForm" th:hidden="true" method="post" th:action="@{/logout}"
+                                      th:object="${user}">
+                    <input type="submit" value="<i class=" fa fa-list" aria-hidden="true"></i>"/>
+                </form>
+                    <a href="javascript: logoutForm.submit();" class="btn header-btn">Log out</a>
+                            </div>
+                            </span>
+
+                        </div>
+                    </div>
+                    <!-- Mobile Menu -->
+                    <div class="col-12">
+                        <div class="mobile_menu d-block d-lg-none"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+</header>
